@@ -92,6 +92,7 @@ int main(int argc, char* argv[]) {
 	la.add(50);
 	la.print();
 	cin.get();
+	la.del();
 
 	return 0;
 }
