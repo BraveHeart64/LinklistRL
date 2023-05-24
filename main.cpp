@@ -1,98 +1,121 @@
 #include<iostream>
 using namespace std;
 
+class Node{
+	public:
+		int value;
+		Node* next;
+
+};
+
+class LinkedList{
+
+	Node* root = 0;
+	Node*  tail = 0;
+    Node **r = &root;
+
+	public:
+	void Push(int v){
+		Node* temp = new Node();
+		temp->value = v;
+		if(root == 0){
+			root = temp;
+			tail = root;
+		}
+		else{
+			tail->next = temp;
+			tail = tail->next;
+		}
+
+    }
+
+	void PrintList(){
+		Node* r;
+		r = root;
+
+		while(r != 0){
+			cout<<r->value<<endl;
+			r=r->next;
+
+		}
+
+	}
+
+	void Delete(){
 
 
-struct Node {
-	Node* next;
-	int value;
+
+        if(root == 0){
+        // if the arraylist is empty do nothing else delete all values
+
+        }
+        else{
+            while(root->next != 0){
+                r = &root;
+                r=0;
+                root=root->next;
+
+
+            }
+            r = &root;
+            r  = 0;
+            root = 0;
+            tail = 0;
+        }
+	}
+
+
+	void DelAValue(int v){
+        Node* prevnode=0, *tmp;
+        tmp = root;
+
+
+        while(tmp->value != v){
+            prevnode = tmp;
+            tmp=tmp->next;
+            if(tmp->next ==0){
+                break;
+            }
+
+
+
+        }
+
+        if(prevnode != 0){
+            prevnode->next = prevnode->next->next;
+
+        tmp = 0;
+        }
+        else{
+            prevnode = root;
+            root = 0;
+            root = prevnode->next;
+
+
+        }
+
+
+	}
+
 };
 
 
-class linklist {
-private:
-	Node * head, *tail;
-	Node** ref_to_head;
+int main(){
 
+	LinkedList ls;
+	ls.Push(40);
+	ls.Push(30);
+	ls.Push(20);
+	ls.Push(10);
+	ls.Push(5);
+	ls.Push(35);
+	ls.PrintList();
+	cout<<endl;
 
-public:
-	void add(int val);
-	void print();
-	void del();
+    ls.DelAValue(20);
 
-	linklist();
-	~linklist();
-};
-
-
-linklist::linklist() {
-	head = 0;
-	tail = 0;
-
-}
-
-linklist::~linklist() {
-	del();
-}
-
-void linklist::add(int val){
-	Node* temp = new Node();
-	temp->value = val;
-
-	if (head == 0) {
-		head = temp;
-		tail = temp;
-	}
-	else {
-		tail->next = temp;
-		tail = tail->next;
-	}
-
-
-
-}
-
-void linklist::del() {
-	Node* temp = new Node();
-	Node* next;
-	ref_to_head = &head;
-	
-	while (temp != 0) {
-		next = temp->next;
-		delete temp;
-		temp = next;
-	}
-
-	*ref_to_head = 0;
-
-
-
-
-}
-
-
-
-void linklist::print() {
-	Node* temp = new Node();
-	temp = head;
-	while (temp != 0) {
-		cout << temp->value<<endl;
-		temp = temp->next;
-	}
-
-}
-
-
-int main(int argc, char* argv[]) {
-	linklist la;
-	la.add(10);
-	la.add(20);
-	la.add(30);
-	la.add(40);
-	la.add(50);
-	la.print();
-	cin.get();
-	la.del();
-
+	cout<<endl;
+	ls.PrintList();
+	ls.Delete();
 	return 0;
 }
