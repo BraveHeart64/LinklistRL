@@ -64,6 +64,25 @@ class LinkedList{
         }
 	}
 
+	int FindAValue(int val){
+
+        Node* r;
+		r = root;
+
+		while(r != 0 || r->value != val){
+            if(r->value == val){
+                return r->value;
+            }
+            else if(r->next == 0){
+                break;
+            }
+            else{
+                r=r->next;
+            }
+		}
+
+    return 0;
+	}
 
 	void DelAValue(int v){
         Node* prevnode=0, *tmp;
@@ -73,7 +92,7 @@ class LinkedList{
         while(tmp->value != v){
             prevnode = tmp;
             tmp=tmp->next;
-            if(tmp->next ==0){
+            if(tmp->next == 0){
                 break;
             }
 
@@ -101,7 +120,7 @@ class LinkedList{
 
 
 int main(){
-
+    int look = 0;
 	LinkedList ls;
 	ls.Push(40);
 	ls.Push(30);
@@ -116,6 +135,8 @@ int main(){
 
 	cout<<endl;
 	ls.PrintList();
+	 look = ls.FindAValue(20);
+	cout<<"look is: "<< look;
 	ls.Delete();
 	return 0;
 }
